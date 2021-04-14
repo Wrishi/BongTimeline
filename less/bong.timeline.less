@@ -1,0 +1,253 @@
+/*! Copyright (c) 2016 Saptarshi Bhattacharya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+@scroller-height: 620px;
+@scroller-border-width: 1px 1px 0 1px;
+@scroller-border-style: solid;
+@scroller-border-color: #31429A;
+
+@scroller-height-vertical: 600px;
+@scroller-border-width-vertical: 1px 1px 1px 1px;
+@scroller-border-style-vertical: solid;
+@scroller-border-color-vertical: #31429A;
+
+@content-height: 555px;
+@content-background-color: #fff;
+
+@content-width-vertical: calc(~'100% - 40px');
+
+@event-border-width: 0;
+@event-border-style: solid;
+@event-border-color: #31429A;
+@event-background-color: rgba(255, 255, 255, 0.9);
+@event-padding: 0;
+@event-border-radius: 3px;
+@event-font-size: 12px;
+@event-min-width: 60px;
+@event-box-shadow: 1px 2px 3px #666;
+
+@event-width-vertical: 120px;
+@event-padding-vertical: 0;
+@event-min-height-vertical: 75px;
+
+@units-border-width: 1px 0 0 1px;
+@units-border-style: solid;
+@units-border-color: #31429A;
+@units-background-color: #fff;
+@units-height: 10px;
+@units-width: 89px;
+@units-date-font-size: 16px;
+@units-date-margin-top: 10px;
+@units-date-margin-left: -4px;
+
+@units-border-width-vertical: 1px 1px 0 0;
+@units-margin-left-vertical: 29px;
+@units-date-margin-top-vertical: -23px;
+@units-date-margin-left-vertical: -45px;
+@units-date-width-vertical: 42px;
+
+@units-line-margin-top-vertical: -1px;
+@units-line-margin-left-vertical: 10px;
+@units-line-border-width-vertical: 0 0 0 0;
+@units-line-border-style-vertical: solid;
+@units-line-border-color-vertical: #cecece;
+@units-line-height-vertical: 1px;
+@units-line-background-color-vertical: #cecece;
+
+.timeline{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+	font-size: 0;
+
+
+	.scroller{
+		overflow-x: auto;
+		overflow-y: hidden;
+		width: auto;
+		white-space: nowrap;
+		min-height: @scroller-height;
+		border-width: @scroller-border-width;
+		border-style: @scroller-border-style;
+		border-color: @scroller-border-color;
+
+		&::-webkit-scrollbar { 
+    		display: none; 
+		}
+
+		.content{
+			position: relative;
+			height: @content-height;
+			width: auto;/* Assigned in Javascript */
+			white-space: nowrap;
+			overflow-x: hidden;
+			overflow-y: auto;
+			background-color: @content-background-color;
+
+			.event{
+				width: 400px;
+				position: absolute;
+				display: inline-block;
+				border-width: @event-border-width;
+				border-style: @event-border-style;
+				border-color: @event-border-color;
+				background-color: @event-background-color;
+				padding: @event-padding;
+				border-radius: @event-border-radius;
+				text-align: center;
+				min-width: @event-min-width;
+				box-shadow: @event-box-shadow;
+				z-index: 2;
+
+				.block{
+					width: 100%;
+					height: 100%;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					display: inline-block;
+					padding: 0;
+					font-size: @event-font-size;
+				}
+			}
+		}
+		ul.units{
+			padding: 0px;
+
+			li{
+				display: inline-block;
+				border-width: @units-border-width;
+				border-style: @units-border-style;
+				border-color: @units-border-color;
+				background-color: @units-background-color;
+				height: @units-height;
+				width: @units-width;
+				position: relative;
+
+				span.date{
+					display: inline-block;
+					position: absolute;
+					font-size: @units-date-font-size;
+					margin-top: @units-date-margin-top;
+					margin-left: @units-date-margin-left;
+					line-height: 15px;
+					z-index: 1;
+
+					.day{
+
+				    }
+				    .month{
+				    	min-height: 14px;
+				    	font-size: 12px;
+				    }
+				    .year{
+				    	font-size: 10px;
+				    }
+				}
+				    
+			    .line{
+			    	position: absolute;
+				    height: 100000%;
+				    width: 1px;
+				    background-color: #cecece;
+				    bottom: 0px;
+				    z-index: 1;
+				    -webkit-transform: translate3d(0,0,0);
+
+				    &.mark{
+				    	background-color: #ff0000;
+				    }
+			    }
+			}
+		}
+	}
+
+	&.vertical{
+		.scroller{
+			overflow-x: hidden;
+			overflow-y: auto;
+			width: auto;
+			white-space: nowrap;
+			min-height: 0;
+			height: @scroller-height-vertical;
+			border-width: @scroller-border-width-vertical;
+			border-style: @scroller-border-style-vertical;
+			border-color: @scroller-border-color-vertical;
+
+			&::-webkit-scrollbar { 
+	    		display: none; 
+			}
+
+			.content{
+				position: relative;
+				height: auto;
+				width: auto;/* Assigned in Javascript */
+				white-space: nowrap;
+				overflow-x: auto;
+				overflow-y: hidden;
+				display: inline-block;
+				float: right;
+				width: @content-width-vertical;
+
+				.event{
+					width: @event-width-vertical;
+					position: absolute;
+					display: inline-block;
+					text-align: left;
+    				padding: @event-padding-vertical;
+    				min-height: @event-min-height-vertical;
+    				overflow: hidden;
+
+    				.block{
+						width: 100%;
+						height: 100%;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						display: inline-block;
+						padding: 0;
+						font-size: @event-font-size;
+					}
+				}
+			}
+			ul.units{
+				padding: 0px;
+
+				li{
+					display: list-item;
+					height: @units-width;
+					width: @units-height;
+					border-width: @units-border-width-vertical;
+    				margin-left: @units-margin-left-vertical;
+
+					span.date{
+						margin-top: @units-date-margin-top-vertical;
+						margin-left: @units-date-margin-left-vertical;
+					    text-align: right;
+					    width: @units-date-width-vertical;
+					    line-height: 15px;
+					}
+					.line{
+					    width: 100000%;
+					    height: @units-line-height-vertical;
+					    margin-top: @units-line-margin-top-vertical;
+					    margin-left: @units-line-margin-left-vertical;
+					    border-width: @units-line-border-width-vertical;
+					    border-style: @units-line-border-style-vertical;
+					    border-color: @units-line-border-color-vertical;
+					    background-color: @units-line-background-color-vertical;
+					    top: 0;
+
+					    &.mark{
+				    		background-color: #ff0000;
+				    	}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bong Timeline</title>
+	<link rel="stylesheet" type="text/css" href="css/bong.timeline.min.css" />
+	<style type="text/css">
+		.regina { background-color: #0080bc }
+	</style>
+</head>
+<body>
+<input type="text" name="default-date" id="default-date""/>
+<button id="get-timeline" onclick="getTimeline()">GET</button>
+<br/><br/>
+<div id="timeline"></div>
+<script type="text/javascript" src="js/bong.timeline.min.js"></script>
+<script type="text/javascript">
+	var timeline = new Timeline({
+		wrapperId: "timeline",
+		data : [
+			{ startDate: new Date("03/19/2016"), endDate: new Date("03/19/2016"), title: "Samson", by: "Regina Spektor" },
+			{ startDate: new Date("03/09/2016 05:30:00"), endDate: new Date("03/09/2016 6:30:00"), title: "Eet", by: "Regina Spektor" },
+			{ startDate: new Date("05/20/2016"), endDate: new Date("06/05/2016"), title: "After glow", by: "INXS" },
+			{ startDate: new Date("06/07/2016"), endDate: new Date("06/12/2016"), title: "Please forgive me", by: "Bryan Adams" },
+			{ startDate: new Date("06/12/2016"), endDate: new Date("06/18/2016"), title: "Loose yourself to dance", by: "Daft Punk" },
+			{ startDate: new Date("06/05/2016"), endDate: new Date("06/10/2016"), title: "Look at the sky full of stars", by: "Coldplay" },
+			{ startDate: new Date("06/11/2016"), endDate: new Date("06/15/2016"), title: "Perhaps perhas perhaps", by: "Doris Day" },
+			{ startDate: new Date("06/07/2016"), endDate: new Date("06/12/2016"), title: "Ne me quitte pas", by: "Regina Spektor" },
+			{ startDate: new Date("06/07/2016"), endDate: new Date("06/12/2016"), title: "Fernando", by: "ABBA" },
+			{ startDate: new Date("06/07/2016"), endDate: new Date("06/12/2016"), title: "Hey there Delilah", by: "Plain White T" },
+			{ startDate: new Date("06/09/2016"), endDate: new Date("06/09/2016"), title: "I can tell that we are gonna be friends", by: "Jack Johnson" },
+			{ startDate: new Date("06/09/2016"), endDate: new Date("06/09/2016"), title: "You are a part time lover", by: "Jack Johnson" },
+			{ startDate: new Date("04/01/2016"), endDate: new Date("05/22/2016"), title: "I believe in angels", by: "ABBA" },
+			{ startDate: new Date("03/20/2016"), endDate: new Date("04/05/2016"), title: "I'm leaving on a jet plane", by: "John Denver" },
+			{ startDate: new Date("06/29/2016"), endDate: new Date("07/02/2016"), title: "Numb", by: "Linkin Park"},
+			{ startDate: new Date("07/10/2016"), endDate: new Date("07/21/2016"), title: "Scarborough Fair", by: "Simon Garfunkel"},
+			{ startDate: new Date("07/24/2016"), endDate: new Date("07/24/2016"), title: "It wasn't me", by: "Shaggy"}
+		],
+		orientation: "horizontal",
+		defaultDate: new Date("05/24/2016"),
+		clutter: true,
+		clutterExtras: 3,
+		view: "hour", // (day/hour/month/year/week)
+		template: function(data){
+			return "<span class='block"+ (data.by == "Regina Spektor"? " regina" : "") +"'><a href='#'>"+ data.title +"</a></br>" + data.by + "</span>";
+		},
+		onRender: function(){
+			if(this.getMaxSlotIndex() * this.slotSize > this.getDOMContent().offsetWidth) console.log("fat");
+		},
+		//renderEmptyTimeline: false,
+		onEmptyTimeline: function(){
+			alert("Ain't no data!");
+		}
+	});
+
+	function getTimeline(){
+		timeline.setAttributes({
+			defaultDate: new Date(document.getElementById("default-date").value)
+		}).render();
+	}
+</script>
+</body>
+</html>
